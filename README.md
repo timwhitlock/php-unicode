@@ -1,10 +1,6 @@
 # php-unicode
 
-It's a common criticism of PHP, that it doesn't have native Unicode support.
-Even 15 year old JavaScript manages that. Except not really, because it only supports code points natively up to [\uFFFF](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/charCodeAt)
-whereas Unicode goes up to \U10FFFF.
-
-Printing out a utf8-encoded PHP string might look like this:
+It's a common criticism of PHP that it doesn't have native Unicode support. Printing out a utf8-encoded PHP string might look like this:
 
 <code><?php  
 header('Content-Type: text/html; charset=utf8', true );  
