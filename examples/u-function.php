@@ -4,7 +4,7 @@
  */
 
 chdir(__DIR__);
-require('../php-unicode.php');
+require('../u.php');
 
 header('Content-Type: text/html; charset=utf8', true );
 

@@ -1,38 +1,30 @@
 <?php
+
+namespace timwhitlock\Unicode\Tests\Utf8String;
+
+use timwhitlock\Unicode\Utf8String;
+
 /**
- * Test UTF-8 "chr" function
- * @group php-unicode
+ * Test Utf8String::parse
+ * @group utf8
  */
-class ChrTest extends PHPUnit_Framework_TestCase {
+class ParseTest extends \PHPUnit_Framework_TestCase {
     
-    public function testAsciiMatchesPhpChr(){
-        for( $i = 0; $i < 0x80; $i++ ){
-            $this->assertEquals( chr($i), UnicodeString::chr($i) );
-        }
-    }
-
-    public function testHighAsciiInvalid(){
-        for( $i = 0x80; $i <= 0xFF; $i++ ){
-            $this->assertNotEquals( chr($i), UnicodeString::chr($i) );
-        }
-    }
-
-    public function testHighAsciiMatchesPhpUtf8Encode(){
-        for( $i = 0x80; $i <= 0xFF; $i++ ){
-            $this->assertEquals( utf8_encode(chr($i)), UnicodeString::chr($i) );
-        }
+    private function u( $text ){
+        $u = Utf8String::parse( $text );
+        $this->assertInstanceof('timwhitlock\Unicode\Utf8String', $u );
+        return $u->__toString();
     }
     
     public function testDoubleByte(){
-        $pound = UnicodeString::chr(0xA3);
+        $pound = $this->u('\u00A3');
         $this->assertEquals( 2, strlen($pound) );
         $this->assertEquals( "\xC2", $pound{0} );
         $this->assertEquals( "\xA3", $pound{1} );
     }
     
-    
     public function testTripleByte(){
-        $tick = UnicodeString::chr(0x2714);
+        $tick = $this->u('\u2714');
         $this->assertEquals( 3, strlen($tick) );
         $this->assertEquals( "\xE2", $tick{0} );
         $this->assertEquals( "\x9C", $tick{1} );
@@ -40,7 +32,7 @@ class ChrTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testQuadrupleByte(){
-        $smiley = UnicodeString::chr(0x1F601);
+        $smiley = $this->u('\U01F601');
         $this->assertEquals( 4, strlen($smiley) );
         $this->assertEquals( "\xF0", $smiley{0} );
         $this->assertEquals( "\x9F", $smiley{1} );
