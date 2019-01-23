@@ -1,3 +1,9 @@
+# NO LONGER MAINTAINED
+
+PHP 7 now has native Unicode support.
+
+---
+
 # php-unicode
 
 Utilities for working with Unicode characters in PHP.
